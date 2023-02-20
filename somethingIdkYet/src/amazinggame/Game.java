@@ -7,9 +7,10 @@ public class Game {
         System.out.println("...to your doom!!!");
         printDivider(25);
     }
-    public void printDivider(int dividerLength) {
+    public static void printDivider(int dividerLength) {
         for (int i = 0; i < dividerLength; i++) {
-            System.out.print("-");
+            System.out.print("*");
         }
+        System.out.println();
     }
 }
