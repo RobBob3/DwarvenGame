@@ -32,4 +32,5 @@ player has limited inventory to hold ores
 player has to manage torches in order to not get lost in the darkness
 limited number of torches, only can be bought
 if torches run out they will be attacked (like don't starve) by invisible enemies in the dark
+two rooms, one for fighting enemies, one for buying from shop
  */

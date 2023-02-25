@@ -13,6 +13,7 @@ public class Player {
     }
 
     public boolean isAlive = true;
+    public int torchAmount = 3;
     int playerCoordinateY = 6;
     int playerCoordinateX = 6;
     int playerWantsToMoveCoordinateX = 6;
@@ -31,7 +32,7 @@ public class Player {
     }
 
     private boolean determineIfPlayerCanMove() {
-        if (room.currentRoomInfo[playerWantsToMoveCoordinateY][playerWantsToMoveCoordinateX] == ".")
+        if (room.currentRoomInfo[playerWantsToMoveCoordinateY][playerWantsToMoveCoordinateX] == '.')
             return true;
         else
             return false;
