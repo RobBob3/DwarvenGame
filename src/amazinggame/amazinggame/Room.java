@@ -1,57 +1,56 @@
 package amazinggame;
 import jcurses.system.*;
+
 public class Room {
-   private Player player;
+   public Player player;
+
    Room(Player player) {
       this.player = player;
+      Player player1 = player;
    }
-   public static char[][] currentRoomInfo =
-           {{'|', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                   {'|', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '|'}};
-   public static void resetRoom() {
-      currentRoomInfo =
-              new char[][]{{'|', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'},
-                      {'|', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '|'}};
-   }
+   int printedTileXCoordinate = 0;
+   int printedTileYCoordinate = 0;
+
+   public static String[][] currentRoomInfo =
+           {{"|", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"},
+                   {"|", "-", "-", "-", "-", "-", "+", "-", "-", "-", "-", "-", "|"},
+                   {" ", " ", " ", " ", "|", ".", ".", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", "(", ".", "(", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", ".", ".", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", "-", "=", "-", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", ".", "@", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", "-", "+", "-", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", ".", ".", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", ".", ".", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", ".", ".", ".", "|", " ", " ", " ", " "},
+                   {" ", " ", " ", " ", "|", "-", "-", "-", "|", " ", " ", " ", " "},};
 
    public void printRoom() {
-      int printedTileXCoordinate = 0;
-      int printedTileYCoordinate = 0;
       do {
          printedTileXCoordinate = 0;
          do {
             if (printedTileXCoordinate == player.playerCoordinateX && printedTileYCoordinate == player.playerCoordinateY) {
-               Toolkit.printString("@", printedTileXCoordinate + 10, printedTileYCoordinate + 10, new CharColor(CharColor.BLACK, CharColor.GREEN));
+               Toolkit.printString("@", printedTileXCoordinate + 10, printedTileYCoordinate + 10, new CharColor(CharColor.BLACK, CharColor.YELLOW));
             }
-            else if (tileIsLit(player.playerCoordinateX, player.playerCoordinateY, printedTileXCoordinate, printedTileYCoordinate, 2)){
-               Toolkit.printString(String.valueOf(currentRoomInfo[printedTileYCoordinate][printedTileXCoordinate]), printedTileXCoordinate + 10, printedTileYCoordinate + 10, new CharColor(CharColor.BLACK, CharColor.GREEN));
-            }
+            else if (tileIsLit(player.playerCoordinateX, player.playerCoordinateY, printedTileXCoordinate, printedTileYCoordinate, 2) && player.torchAmount > 0){
+               printLitTile();
+
+               }
             else
                Toolkit.printString(String.valueOf(currentRoomInfo[printedTileYCoordinate][printedTileXCoordinate]), printedTileXCoordinate + 10, printedTileYCoordinate + 10, new CharColor(CharColor.BLACK, CharColor.WHITE));
             printedTileXCoordinate++;
-         } while (printedTileXCoordinate < currentRoomInfo.length);
+         } while (printedTileXCoordinate < currentRoomInfo[0].length);
          printedTileYCoordinate++;
       } while (printedTileYCoordinate < currentRoomInfo.length);
    }
@@ -65,5 +64,10 @@ public class Room {
       }
       else
          return false;
+   }
+
+   private void printLitTile() {
+      Toolkit.printString(String.valueOf(currentRoomInfo[printedTileYCoordinate][printedTileXCoordinate]), printedTileXCoordinate + 10, printedTileYCoordinate + 10, new CharColor(CharColor.BLACK, CharColor.YELLOW));
+
    }
 }

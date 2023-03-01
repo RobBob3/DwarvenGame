@@ -1,23 +1,18 @@
 package amazinggame;
 
-import amazinggame.Room;
-
 public class Player {
-    private Game game;
-    Player(Game game) {
-        this.game = game;
-    }
-    private Room room;
-    Player(Room room) {
-        this.room = room;
-    }
+    Game game;
+    Player(Game game) { this.game = game; }
+    Room room;
+    Player(Room room) { this.room = room; }
 
     public boolean isAlive = true;
-    public int torchAmount = 3;
-    int playerCoordinateY = 6;
+    public final String TRAVERSABLE_TILES = ".+";
+    public int torchAmount = 0;
+    int playerCoordinateY = 14;
     int playerCoordinateX = 6;
-    int playerWantsToMoveCoordinateX = 6;
-    int playerWantsToMoveCoordinateY = 6;
+    int playerWantsToMoveCoordinateX = playerCoordinateX;
+    int playerWantsToMoveCoordinateY = playerCoordinateY;
 
     public void movePlayer() {
         determineWherePlayerWillMove();
@@ -32,7 +27,9 @@ public class Player {
     }
 
     private boolean determineIfPlayerCanMove() {
-        if (room.currentRoomInfo[playerWantsToMoveCoordinateY][playerWantsToMoveCoordinateX] == '.')
+        String tileToMove;
+        tileToMove = String.valueOf(room.currentRoomInfo[playerWantsToMoveCoordinateY][playerWantsToMoveCoordinateX]);
+        if (TRAVERSABLE_TILES.contains(tileToMove))
             return true;
         else
             return false;

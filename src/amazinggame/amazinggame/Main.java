@@ -3,15 +3,15 @@ import jcurses.system.*;
 
 
 class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
         Player player = new Player(game);
         Testing testing = new Testing(game);
         Room room = new Room(player);
         while(player.isAlive) {
             Toolkit.clearScreen(new CharColor(CharColor.BLACK, CharColor.BLACK));
-            testing.printInput();
             room.printRoom();
+            Thread.sleep(20);
             game.receiveInput();
             player.movePlayer();
         }
